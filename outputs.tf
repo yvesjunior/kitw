@@ -73,3 +73,40 @@ output "vm_ids" {
     ep = [azurerm_virtual_machine.ep_vm01.id, azurerm_virtual_machine.ep_vm02.id]
   }
 }
+
+# -----------------------------------------------------------------------------
+# VM ↔ disk linkage (each VM lists its OS disk + data disks)
+# -----------------------------------------------------------------------------
+output "vm_disk_links" {
+  description = "Each VM and its linked disks (OS + data). Disks are attached via storage_os_disk / storage_data_disk in resources-vms.tf."
+  value = {
+    EPPD1VMKWMFT01 = {
+      vm_id        = azurerm_virtual_machine.ep_vm01.id
+      os_disk_id   = azurerm_managed_disk.ep_vm01_os.id
+      os_disk_name = azurerm_managed_disk.ep_vm01_os.name
+      data_disks = [
+        { id = azurerm_managed_disk.ep_vm01_data1.id, name = azurerm_managed_disk.ep_vm01_data1.name, lun = 0 },
+        { id = azurerm_managed_disk.ep_vm01_data2.id, name = azurerm_managed_disk.ep_vm01_data2.name, lun = 1 },
+      ]
+    }
+    EPPD1VMKWMFT02 = {
+      vm_id        = azurerm_virtual_machine.ep_vm02.id
+      os_disk_id   = azurerm_managed_disk.ep_vm02_os.id
+      os_disk_name = azurerm_managed_disk.ep_vm02_os.name
+      data_disks = [
+        { id = azurerm_managed_disk.ep_vm02_data1.id, name = azurerm_managed_disk.ep_vm02_data1.name, lun = 0 },
+      ]
+    }
+  }
+}
+
+output "disk_to_vm" {
+  description = "Each managed disk and the VM it is linked to (via VM storage_os_disk / storage_data_disk)."
+  value = {
+    (azurerm_managed_disk.ep_vm01_os.name)     = "EPPD1VMKWMFT01 (OS)"
+    (azurerm_managed_disk.ep_vm01_data1.name)  = "EPPD1VMKWMFT01 (data LUN 0)"
+    (azurerm_managed_disk.ep_vm01_data2.name)  = "EPPD1VMKWMFT01 (data LUN 1)"
+    (azurerm_managed_disk.ep_vm02_os.name)     = "EPPD1VMKWMFT02 (OS)"
+    (azurerm_managed_disk.ep_vm02_data1.name)  = "EPPD1VMKWMFT02 (data LUN 0)"
+  }
+}

@@ -45,7 +45,15 @@ For each resource type **linked to a VM**, this document lists its **own depende
 
 ---
 
-## 5. Network security group
+## 5. Load balancer
+
+| Resource | Terraform address | Depends on |
+|----------|-------------------|------------|
+| *(none)* | — | **No Load Balancer** was found or added for Kiteworks. If your Kiteworks VMs sit behind an LB, run `az network lb list -g Kiteworks-EP` (and -ES, -CP, -CS) or `az network lb list` in the subscription, then add `azurerm_lb` + backend pool + rules in `resources-network.tf` (see HMIP `azurerm_lb.eprmg` in az/hmip for pattern). |
+
+---
+
+## 6. Network security group (NSG)
 
 | Resource | Terraform address | Depends on |
 |----------|-------------------|------------|
@@ -56,7 +64,7 @@ For each resource type **linked to a VM**, this document lists its **own depende
 
 ---
 
-## 6. Subnet
+## 7. Subnet
 
 | Resource | Terraform address | Depends on |
 |----------|-------------------|------------|
@@ -67,7 +75,7 @@ For each resource type **linked to a VM**, this document lists its **own depende
 
 ---
 
-## 7. Subnet – route table association
+## 8. Subnet – route table association
 
 | Resource | Terraform address | Depends on |
 |----------|-------------------|------------|
@@ -78,7 +86,7 @@ For each resource type **linked to a VM**, this document lists its **own depende
 
 ---
 
-## 8. Subnet – NSG association
+## 9. Subnet – NSG association
 
 | Resource | Terraform address | Depends on |
 |----------|-------------------|------------|
@@ -89,7 +97,7 @@ For each resource type **linked to a VM**, this document lists its **own depende
 
 ---
 
-## 9. Network interface (linked to VM)
+## 10. Network interface (linked to VM)
 
 | Resource | Terraform address | Depends on |
 |----------|-------------------|------------|
@@ -105,7 +113,7 @@ For each resource type **linked to a VM**, this document lists its **own depende
 
 ---
 
-## 10. Managed disk (linked to VM)
+## 11. Managed disk (linked to VM)
 
 | Resource | Terraform address | Depends on |
 |----------|-------------------|------------|
@@ -119,7 +127,7 @@ For each resource type **linked to a VM**, this document lists its **own depende
 
 ---
 
-## 11. Virtual machine (top of chain)
+## 12. Virtual machine (top of chain)
 
 | Resource | Terraform address | Depends on |
 |----------|-------------------|------------|

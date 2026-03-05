@@ -1,5 +1,7 @@
 # =============================================================================
 # Managed disks – OS and data disks for Kiteworks VMs (as resources)
+# These disks are linked to VMs in resources-vms.tf via storage_os_disk and
+# storage_data_disk (managed_disk_id). See outputs vm_disk_links and disk_to_vm.
 # Adjust names/sizes from Azure; create_option = "Empty" for import compatibility
 # =============================================================================
 

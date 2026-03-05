@@ -1,5 +1,7 @@
 # =============================================================================
 # Kiteworks VMs – Linux (attach existing NICs and managed disks)
+# Disks are linked to VMs via storage_os_disk.managed_disk_id and
+# storage_data_disk[].managed_disk_id (see resources-disks.tf for disk definitions).
 # =============================================================================
 
 # ----- Kiteworks-EP (Canada East) -----
@@ -9,6 +11,7 @@ resource "azurerm_virtual_machine" "ep_vm01" {
   location              = "canadaeast"
   vm_size               = "Standard_D16s_v3"
   network_interface_ids = [azurerm_network_interface.ep_nic01.id]
+  # OS disk link
   storage_os_disk {
     name              = azurerm_managed_disk.ep_vm01_os.name
     managed_disk_id   = azurerm_managed_disk.ep_vm01_os.id
