@@ -69,9 +69,27 @@ output "nic_ids" {
   }
 }
 output "vm_ids" {
+  description = "All 9 Kiteworks VMs by resource group."
   value = {
-    ep = [azurerm_virtual_machine.ep_vm01.id, azurerm_virtual_machine.ep_vm02.id]
+    ep = [azurerm_virtual_machine.ep_vm01.id, azurerm_virtual_machine.ep_vm02.id, azurerm_virtual_machine.ep_vm03.id]
+    es = [azurerm_virtual_machine.es_vm01.id, azurerm_virtual_machine.es_vm02.id, azurerm_virtual_machine.es_vm03.id]
+    cp = [azurerm_virtual_machine.cp_vm01.id]
+    cs = [azurerm_virtual_machine.cs_vm01.id, azurerm_virtual_machine.cs_vm02.id]
   }
+}
+output "vm_names" {
+  description = "All 9 Kiteworks VM names (no VM left out)."
+  value = [
+    azurerm_virtual_machine.ep_vm01.name,
+    azurerm_virtual_machine.ep_vm02.name,
+    azurerm_virtual_machine.ep_vm03.name,
+    azurerm_virtual_machine.es_vm01.name,
+    azurerm_virtual_machine.es_vm02.name,
+    azurerm_virtual_machine.es_vm03.name,
+    azurerm_virtual_machine.cp_vm01.name,
+    azurerm_virtual_machine.cs_vm01.name,
+    azurerm_virtual_machine.cs_vm02.name,
+  ]
 }
 
 # -----------------------------------------------------------------------------

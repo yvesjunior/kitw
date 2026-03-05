@@ -58,7 +58,136 @@ resource "azurerm_managed_disk" "ep_vm02_data1" {
   depends_on           = [azurerm_resource_group.ep]
 }
 
-# ----- Kiteworks-ES, Kiteworks-CP, Kiteworks-CS: add disk resources per VM from Azure -----
-# Example pattern for ES (expand with actual disk names from az disk list -g Kiteworks-ES):
-# resource "azurerm_managed_disk" "es_vm01_os" { ... }
-# Run: az vm show -g Kiteworks-ES -n <vm> --query storageProfile -o json
+# ----- Kiteworks-EP (3rd VM) -----
+resource "azurerm_managed_disk" "ep_vm03_os" {
+  name                 = "EPPD1VM1KWMFT1_OsDisk_1"
+  resource_group_name  = azurerm_resource_group.ep.name
+  location             = local.loc_east
+  storage_account_type = "Premium_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = 128
+  depends_on           = [azurerm_resource_group.ep]
+}
+resource "azurerm_managed_disk" "ep_vm03_data1" {
+  name                 = "EPPD1VM1KWMFT1_lun_0"
+  resource_group_name  = azurerm_resource_group.ep.name
+  location             = local.loc_east
+  storage_account_type = "Premium_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = 64
+  depends_on           = [azurerm_resource_group.ep]
+}
+
+# ----- Kiteworks-ES -----
+resource "azurerm_managed_disk" "es_vm01_os" {
+  name                 = "ESUT1VMKWMFT01_OsDisk_1"
+  resource_group_name  = azurerm_resource_group.es.name
+  location             = local.loc_east
+  storage_account_type = "Premium_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = 128
+  depends_on           = [azurerm_resource_group.es]
+}
+resource "azurerm_managed_disk" "es_vm01_data1" {
+  name                 = "ESUT1VMKWMFT01_lun_0"
+  resource_group_name  = azurerm_resource_group.es.name
+  location             = local.loc_east
+  storage_account_type = "Premium_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = 64
+  depends_on           = [azurerm_resource_group.es]
+}
+resource "azurerm_managed_disk" "es_vm02_os" {
+  name                 = "EPPD1KWMFT02_OsDisk_1"
+  resource_group_name  = azurerm_resource_group.es.name
+  location             = local.loc_east
+  storage_account_type = "Premium_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = 128
+  depends_on           = [azurerm_resource_group.es]
+}
+resource "azurerm_managed_disk" "es_vm02_data1" {
+  name                 = "EPPD1KWMFT02_lun_0"
+  resource_group_name  = azurerm_resource_group.es.name
+  location             = local.loc_east
+  storage_account_type = "Premium_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = 64
+  depends_on           = [azurerm_resource_group.es]
+}
+resource "azurerm_managed_disk" "es_vm03_os" {
+  name                 = "ESUT1KWMFT01_OsDisk_1"
+  resource_group_name  = azurerm_resource_group.es.name
+  location             = local.loc_east
+  storage_account_type = "Premium_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = 128
+  depends_on           = [azurerm_resource_group.es]
+}
+resource "azurerm_managed_disk" "es_vm03_data1" {
+  name                 = "ESUT1KWMFT01_lun_0"
+  resource_group_name  = azurerm_resource_group.es.name
+  location             = local.loc_east
+  storage_account_type = "Premium_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = 64
+  depends_on           = [azurerm_resource_group.es]
+}
+
+# ----- Kiteworks-CP -----
+resource "azurerm_managed_disk" "cp_vm01_os" {
+  name                 = "CPPD1VMKWMFT01_OsDisk_1"
+  resource_group_name  = azurerm_resource_group.cp.name
+  location             = local.loc_central
+  storage_account_type = "Premium_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = 128
+  depends_on           = [azurerm_resource_group.cp]
+}
+resource "azurerm_managed_disk" "cp_vm01_data1" {
+  name                 = "CPPD1VMKWMFT01_lun_0"
+  resource_group_name  = azurerm_resource_group.cp.name
+  location             = local.loc_central
+  storage_account_type = "Premium_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = 64
+  depends_on           = [azurerm_resource_group.cp]
+}
+
+# ----- Kiteworks-CS -----
+resource "azurerm_managed_disk" "cs_vm01_os" {
+  name                 = "CSUT1VMKWMFT01_OsDisk_1"
+  resource_group_name  = azurerm_resource_group.cs.name
+  location             = local.loc_central
+  storage_account_type = "Premium_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = 128
+  depends_on           = [azurerm_resource_group.cs]
+}
+resource "azurerm_managed_disk" "cs_vm01_data1" {
+  name                 = "CSUT1VMKWMFT01_lun_0"
+  resource_group_name  = azurerm_resource_group.cs.name
+  location             = local.loc_central
+  storage_account_type = "Premium_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = 64
+  depends_on           = [azurerm_resource_group.cs]
+}
+resource "azurerm_managed_disk" "cs_vm02_os" {
+  name                 = "CPPD1KWMFT01_OsDisk_1"
+  resource_group_name  = azurerm_resource_group.cs.name
+  location             = local.loc_central
+  storage_account_type = "Premium_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = 128
+  depends_on           = [azurerm_resource_group.cs]
+}
+resource "azurerm_managed_disk" "cs_vm02_data1" {
+  name                 = "CPPD1KWMFT01_lun_0"
+  resource_group_name  = azurerm_resource_group.cs.name
+  location             = local.loc_central
+  storage_account_type = "Premium_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = 64
+  depends_on           = [azurerm_resource_group.cs]
+}
